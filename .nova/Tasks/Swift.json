@@ -10,7 +10,7 @@
     },
     "run" : {
       "enabled" : true,
-      "script" : "make -C Swift run"
+      "script" : "make -C Swift"
     }
   }
 }

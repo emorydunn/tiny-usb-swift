@@ -10,7 +10,7 @@
     },
     "run" : {
       "enabled" : true,
-      "script" : "make -C SDK run"
+      "script" : "make -C SDK"
     }
   }
 }
