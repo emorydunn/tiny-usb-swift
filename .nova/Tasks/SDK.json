@@ -1,0 +1,16 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "make -C SDK build"
+    },
+    "clean" : {
+      "enabled" : true,
+      "script" : "make -C SDK clean"
+    },
+    "run" : {
+      "enabled" : true,
+      "script" : "make -C SDK run"
+    }
+  }
+}
