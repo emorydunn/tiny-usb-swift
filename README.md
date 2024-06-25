@@ -1,6 +1,6 @@
 # tiny-usb-swift
 
-An test project for integrating TinyUSB into an embedded Swift project.
+A test project for integrating TinyUSB into an embedded Swift project.
 
 The project is split into two sub-projects, one built using C and one with Swift. Both projects share the same USB configuration files (written in C), with the only difference being the language the working parts of the project are written in. In both cases each project simply blinks the LED based on the USB status, based on the TinyUSB example.
 
