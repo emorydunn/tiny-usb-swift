@@ -64,3 +64,9 @@ target_sources(usb-swift PUBLIC
 	${CMAKE_CURRENT_LIST_DIR}/../Shared/usb_descriptors.c
 )
 ```
+
+### Exposing Swift APIs to C++
+
+The apparent issue is that the rest of the compiled C source can't see the methods defined in the Swift portion. I thought [emitting a header](https://www.swift.org/documentation/cxx-interop/#exposing-swift-apis-to-c) of the Swift code, which could then be linked along with `tusb_config.h` might work. Again, this didn't work as expected.
+
+Adding `-module-name` and `-emit-clang-header-path` to the `swiftc` command does emit a header file, but it doesn't contain the callback methods. Setting `-cxx-interoperability-mode=default` causes the build to fail because `cassert` isn't defined in the `pico-sdk`.
