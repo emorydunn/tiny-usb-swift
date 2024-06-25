@@ -70,3 +70,18 @@ target_sources(usb-swift PUBLIC
 The apparent issue is that the rest of the compiled C source can't see the methods defined in the Swift portion. I thought [emitting a header](https://www.swift.org/documentation/cxx-interop/#exposing-swift-apis-to-c) of the Swift code, which could then be linked along with `tusb_config.h` might work. Again, this didn't work as expected.
 
 Adding `-module-name` and `-emit-clang-header-path` to the `swiftc` command does emit a header file, but it doesn't contain the callback methods. Setting `-cxx-interoperability-mode=default` causes the build to fail because `cassert` isn't defined in the `pico-sdk`.
+
+### `@_cdecl`
+
+Looking through the Swift Forums I found a [post](https://forums.swift.org/t/cdecl-doesnt-work-in-emdedded-dependency/72368) pointing out a bug around exposing Swift APIs from a dependency. Fortunately they mentioned that a solution was to annotate the function and include it in the main app, which is exactly what TinyUSB needs for the callbacks.
+
+Adding `@_cdecl("func_name")` to each of the callbacks (the reports and status) correctly exposes the methods to TinyUSB, no C shim needed.
+
+## Successfully Building TinyUSB
+
+There appear to be two fixes needed to build TinyUSB into a Swift project:
+
+- Manually specifying `CFG_TUSB_MCU`
+- Annotating the callback methods with `@_cdecl`
+
+There are a couple of caveats. The first is the aforementioned issues with manually setting the MCU, this should be pulled from the board config. Secondly the callbacks have to be global functions, which isn't too much of an issue.

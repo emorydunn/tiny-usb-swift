@@ -42,7 +42,6 @@ struct Main {
 
 	}
 
-
 	/// Blink the LED to show the status of the board.
 	static func ledBlinkingTask() {
 
