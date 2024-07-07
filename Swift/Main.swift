@@ -8,7 +8,7 @@ enum BlinkInterval: UInt32 {
 struct Main {
 
 	static var ledPin: UInt32 = 25
-	static var bootPin: UInt32 = 0
+	static var bootPin: UInt32 = 1
 
 	static var interval = BlinkInterval.notMounted
 
